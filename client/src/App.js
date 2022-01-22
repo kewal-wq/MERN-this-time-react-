@@ -1,6 +1,7 @@
 import Axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
+import './App.css';
 
 function App() {
   const [listOfUsers, setListOfUsers] = useState([]);
@@ -10,8 +11,8 @@ function App() {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    Axios.get("http://localhost:5000/users").then((response) => {
-      setListOfUsers(response.data);
+    Axios.get("http://localhost:5000/users").then((res) => {
+      setListOfUsers(res.data);
     });
   }, []);
 
@@ -33,7 +34,7 @@ function App() {
   };
   return (
     <div className="App">
-      <div className="userDisplay">
+      <div className="App-data">
         {listOfUsers.map((users) => {
           return (
             <>
@@ -44,32 +45,40 @@ function App() {
           );
         })}
       </div>
+      <h1 className="addUser">Add a User</h1>
       <div>
+        <label htmlFor="name" id="App-label">Name</label>
         <input
           type="text"
           name="name"
+          id="name"
           placeholder="Name"
           onChange={(event) => {
             setName(event.target.value);
           }}
         />
+        <label htmlFor="age" id="App-label">Age</label>
         <input
+
           type="number"
           name="age"
+          id="age"
           placeholder="Age"
           onChange={(event) => {
             setAge(event.target.value);
           }}
         />
+        <label htmlFor="username" id="App-label">Username</label>
         <input
           type="text"
           name="username"
           placeholder="Username"
+          id="username"
           onChange={(event) => {
             setUsername(event.target.value);
           }}
         />
-        <button onClick={createUser}>Create User</button>
+        <button className="App-button" onClick={createUser}>Create User</button>
       </div>
     </div>
   );
